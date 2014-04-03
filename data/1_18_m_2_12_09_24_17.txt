@@ -1,0 +1,1 @@
+trialNb	groupNb	indexInGroup	cue	association	assoNb	timeToFirstKeypress	timeToSubmission	list	set	load	original_pattern	reproduced_pattern	correct	hits	misses	falseAlarms
