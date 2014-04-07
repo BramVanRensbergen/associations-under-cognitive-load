@@ -24,7 +24,7 @@ public abstract class Options {
 	/**
 	 * True: gui has no titlebar, close-buttons, etc.
 	 */
-	public static final boolean UNDECORATED   = false;
+	public static final boolean UNDECORATED   = true;
 	
 	/**
 	 * Pattern (that the ss will have to reproduce later) will be displayed for this many MS. 
@@ -49,6 +49,16 @@ public abstract class Options {
 	 * Default: 2000ms.
 	 */
 	public static final int INTERN_PATTERN_DELAY  = (DEBUG ? 200 : 2000);
+	
+	/**
+	 * Participants have this many MS to give each association; any longer, and the program skips to the next trial.
+	 */
+	public static final int MAX_RESPONSE_DURATION = (DEBUG ? 1000 : 7000);
+	
+	/**
+	 * When participants answer too slowly, an error is displayed for this many MS before moving on.
+	 */
+	public static final int ERROR_DURATION = (DEBUG ? 1000 : 1000);
 	
 	/**
 	 * Number of associations participants give to each cue. Defaults to 3; using very high values may mess with the UI.

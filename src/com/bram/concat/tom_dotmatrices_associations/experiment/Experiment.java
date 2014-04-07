@@ -65,7 +65,12 @@ public class Experiment {
 	/**
 	 * Used to pause the experiment for certain delays, e.g. to display fixation-cross for x ms, or a blank screen for y ms, etc.
 	 */
-	private Timer timer;
+	public Timer timer;
+	
+	/**
+	 * Skips the rest of the trial if participant is too slow to respond.
+	 */
+	public TimerTask responseTimer;
 		
 	/**
 	 * Used to save the participant's response to the trials in the current trial group. 
@@ -92,7 +97,7 @@ public class Experiment {
 		IO.readStimuli(); 		  //read stimuli from disk
 		Pattern.emptyPattern = new NoloadPattern();		
 		experimentPhase = TRAINING;
-		timer = new Timer();
+		timer = new Timer();		
 		gui = new Gui();		
 		start();
 	}
@@ -236,7 +241,38 @@ public class Experiment {
 		currentAssociationIndex = 1;
 		gui.xpPane.showCue(currentTrial.cue);
 		RT_start = System.currentTimeMillis();
+		addResponseTimer();
 	}
+	
+	/**
+	 * Add a timer that skips the rest of the trial is participants responds too slowly.
+	 * Any existing response timers are first destroyed.
+	 */
+	private void addResponseTimer() {
+		removeResponseTimer();
+		responseTimer = new TimerTask() {
+			 @Override
+			    public void run() {
+				 gui.xpPane.showTooLateError();
+				 
+				 timer.schedule(new TimerTask() {          
+					    @Override
+					    public void run() {
+					    	skipFurtherAssociations("__TOO_LATE__");
+					    }
+					}, Options.ERROR_DURATION);				 
+				 	
+			    }
+		};
+		timer.schedule(responseTimer, Options.MAX_RESPONSE_DURATION);	
+	}
+	
+	public void removeResponseTimer() {
+		if (responseTimer != null) {
+			responseTimer.cancel();
+		}
+	}
+	
 	
 	/**
 	 * Save the participants response to the current Trial.  
@@ -246,13 +282,15 @@ public class Experiment {
 				
 		Trial t = currentTrial;		
 		String responseLine = globalTrialNb + "\t" + globalTrialGroupNb + "\t" + (t.indexInTrialGroup + 1) + "\t" + t.cue + "\t" + association + "\t"
-				 + currentAssociationIndex + "\t" + (timeAtFirstKeypress - RT_start) + "\t" + (timeAtSubmission - RT_start) + "\t" + t.list + "\t" + t.set;
+				 + currentAssociationIndex + "\t" + (timeAtFirstKeypress - RT_start) + "\t" + (timeAtSubmission - RT_start) + "\t" + t.list;
 		responseLines.add(responseLine);	
 		
 		if (currentAssociationIndex < Options.N_ASSOCIATIONS) {		
 			currentAssociationIndex++;
+			addResponseTimer(); //reset timer
 			//just waiting for pp to give more answers!
 		} else {
+			removeResponseTimer(); //remove timer
 			startNextTrial();
 		}
 	}	
@@ -260,9 +298,9 @@ public class Experiment {
 	/**
 	 * Participant clicked 'unknown word' or 'no further associations': write down as such, move to next cue.
 	 */
-	public void skipFurtherAssociations() {		
+	public void skipFurtherAssociations(String responseErrorMessage) {		
 		for (int iAsso = currentAssociationIndex; iAsso <= Options.N_ASSOCIATIONS; iAsso++) {
-			submitResponse("NO_RESPONSE",  RT_start - 1, RT_start -1);
+			submitResponse(responseErrorMessage,  RT_start - 1, RT_start -1);
 		}	
 	}
 	

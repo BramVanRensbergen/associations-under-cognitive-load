@@ -24,20 +24,19 @@ public class Trial {
 	public static List<TrialGroup> experimentTrialGroups;
     	
 	/**
-	 * Full factorial of 2x2 conditions (set1|set2 x list1lowLoad|list1highload), in randomized order.
+	 * Full factorial of 2 conditions (lowLoad|highload), in randomized order.
+	 * (Yes, this is overengineered for the current setup, but allows for easy adding of extra conditions.)
 	 */
 	private static final boolean[][] CONDITION_MATRIX = { 
-		{true, true},
-		{false, true},
-		{false, false},
-		{true, false},
+		{true},
+		{false}
 	};   
     
     public static void createTrials() {
     	if (Experiment.pp == null) {
     		System.err.println("Cannot create trials before participant is defined!");
     	} else {
-    		int ssOffset = Experiment.pp.ssNb % CONDITION_MATRIX.length; //1 to 4
+    		int ssOffset = Experiment.pp.ssNb % CONDITION_MATRIX.length; //1 to 2
     		if (ssOffset == 0) ssOffset = CONDITION_MATRIX.length;
 
     		//create all trials, in 8 groups of 40 (one group per condition)
@@ -46,22 +45,15 @@ public class Trial {
 
     		while (!IO.stimStrings.isEmpty()) {
     			String[] trialLine = IO.stimStrings.remove(0); //the line containing the text of this trial    		
-    			String set1cue = trialLine[0];
-    			int set1cue_list = Integer.parseInt(trialLine[1]);
-    			
-       			String set2cue = trialLine[3];
-    			int set2cue_list = Integer.parseInt(trialLine[4]);
-    			
+    			String cue = trialLine[0];
+    			int list = Integer.parseInt(trialLine[1]);
+    			    			
     			boolean[] condition = CONDITION_MATRIX[(ssOffset - 1) % CONDITION_MATRIX.length]; //-1 because ssOffset starts at 1, while conditionMatrix starts at 0
-    			boolean useSet1 = condition[0];
-    			boolean list1lowload = condition[1];
-    			
-    			String cue = (useSet1 ? set1cue : set2cue);
-    			int list = (useSet1 ? set1cue_list : set2cue_list);  
-    			int set = (useSet1 ? 1 : 2);
+    			boolean list1lowload = condition[0];
+
     			boolean lowLoad = ((list == 1 && list1lowload) || (list == 2 && !list1lowload));
     			
-    			Trial t = new Trial(cue, lowLoad, false, list, set);
+    			Trial t = new Trial(cue, lowLoad, false, list);
     			
     			if	(lowLoad)   lowLoadTrials.add(t);
     			else 			highLoadTrials.add(t);  			
@@ -80,18 +72,18 @@ public class Trial {
     
     public static void createTrainingTrials() {
     	List<Trial> lowLoadTrainingTrials = new ArrayList<Trial>();
-    	lowLoadTrainingTrials.add(new Trial("Training1", true, true, -1, -1));
-    	lowLoadTrainingTrials.add(new Trial("Training2", true, true, -1, -1));
-    	lowLoadTrainingTrials.add(new Trial("Training3", true, true, -1, -1));
-    	lowLoadTrainingTrials.add(new Trial("Training4", true, true, -1, -1));
-    	lowLoadTrainingTrials.add(new Trial("Training5", true, true, -1, -1));
+    	lowLoadTrainingTrials.add(new Trial("menselijk", true, true, -1));
+    	lowLoadTrainingTrials.add(new Trial("na", true, true, -1));
+    	lowLoadTrainingTrials.add(new Trial("imiteren", true, true, -1));
+    	lowLoadTrainingTrials.add(new Trial("slak", true, true, -1));
+    	lowLoadTrainingTrials.add(new Trial("larie", true, true, -1));
     	
     	List<Trial> highLoadTrainingTrials = new ArrayList<Trial>();
-    	highLoadTrainingTrials.add(new Trial("Training6", false, true, -1, -1));
-    	highLoadTrainingTrials.add(new Trial("Training7", false, true, -1, -1));
-    	highLoadTrainingTrials.add(new Trial("Training8", false, true, -1, -1));
-    	highLoadTrainingTrials.add(new Trial("Training9", false, true, -1, -1));
-    	highLoadTrainingTrials.add(new Trial("Training10", false, true, -1, -1));
+    	highLoadTrainingTrials.add(new Trial("serie", false, true, -1));
+    	highLoadTrainingTrials.add(new Trial("overschot", false, true, -1));
+    	highLoadTrainingTrials.add(new Trial("honing", false, true, -1));
+    	highLoadTrainingTrials.add(new Trial("bloed", false, true, -1));
+    	highLoadTrainingTrials.add(new Trial("gelukkig", false, true, -1));
     	
     	trainingTrialGroups = new ArrayList<TrialGroup>(); 
     	trainingTrialGroups.add(new TrialGroup(lowLoadTrainingTrials, true)); 
@@ -113,18 +105,17 @@ public class Trial {
 	 */
 	public String loadString;
 	
-	public int list, set;
+	public int list;
 	
 	/**
 	 * Index of this trial in its trial group i.e. 0..4
 	 */
 	public int indexInTrialGroup; 
 	
-    private Trial(String cue, boolean lowLoad, boolean trainingTrial, int list, int set) {
+    private Trial(String cue, boolean lowLoad, boolean trainingTrial, int list) {
         this.cue = cue;
         this.lowLoad = lowLoad;
         this.list = list;
-        this.set = set;        
         loadString = (lowLoad ? "LOW_LOAD" : "HIGH_LOAD");    
     }
 }

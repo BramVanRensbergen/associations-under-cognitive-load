@@ -39,7 +39,7 @@ public abstract class IO{
 					    new BufferedReader(
 					    new InputStreamReader(
 					    new FileInputStream(stimFile), "UTF-8"));
-            String line = fReader.readLine();
+            String line = fReader.readLine(); //remove header line
             
             while ((line = fReader.readLine()) != null) {
             	stimStrings.add(line.split("\t"));

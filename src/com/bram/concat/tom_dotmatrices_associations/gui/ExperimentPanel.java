@@ -7,6 +7,7 @@ import java.awt.KeyboardFocusManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.util.TimerTask;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -44,7 +45,7 @@ public class ExperimentPanel extends JPanel {
 	/**
 	 * Ss can click this to move to the next cue, because they don't know the word, or because they don't have any more associations.
 	 */
-	private JButton skipButton;					  
+	private SkipButton skipButton;					  
 	
 	private JLabel fixationCross;
 	
@@ -95,11 +96,7 @@ public class ExperimentPanel extends JPanel {
 		responseField.setBounds(Options.screenSize.width/2 - 200 / 2, Options.screenSize.height - 500, 200, 55);
 		responseField.setFont(Text.assoTextfieldFont);
 		
-		skipButton = new JButton("Onbekend woord");
-		skipButton.addActionListener(new ActionListener() { public void actionPerformed(ActionEvent arg0) { //on click, start the experiment		
-			disableKeyListener();
-			Experiment.xp.skipFurtherAssociations();
-		}});
+		skipButton = new SkipButton();
 		skipButton.setBounds(Options.screenSize.width - 200 - 75, Options.screenSize.height - 50 - 75, 200, 50);
 		
 		patternReproductionDoneButton = new JButton("Klaar"); //add ok button, to end pattern reproduction (not displayed yet)
@@ -148,9 +145,10 @@ public class ExperimentPanel extends JPanel {
 	
 	public void showCue(String word) {
 		removeAll();
+		cue.setForeground(Color.black);
 		cue.setText(word);
 		add(cue);
-		skipButton.setText("Onbekend woord");
+		skipButton.setState(SkipButton.unknownText);
 		add(skipButton);
 		responseField.setText("");
 		add(responseField);
@@ -163,9 +161,20 @@ public class ExperimentPanel extends JPanel {
 		repaint();
 		listenToFirstKeypress = true;
 		enableKeyListener();
-		responseField.grabFocus(); 
+		responseField.grabFocus(); 		
 	}
 	
+	public void showTooLateError() {
+		removeAll();
+		cue.setForeground(Color.red);
+		cue.setText("Te traag!");
+		add(cue);
+		
+		validate();
+		repaint();
+	}
+	
+
 	/**
 	 * Submit the association the participant gave; if it was a first or second association, display it while pp thinks about subsequent associations.
 	 */
@@ -175,7 +184,7 @@ public class ExperimentPanel extends JPanel {
 		if (Experiment.xp.currentAssociationIndex < Options.N_ASSOCIATIONS) {		// this was first or second association	
 			previousAssociationLabels[Experiment.xp.currentAssociationIndex - 1].setText(a); //-1 because that var is 1..3 and the array is 0..2		
 			listenToFirstKeypress = true;
-			skipButton.setText("Geen verdere antwoorden");
+			skipButton.setState(SkipButton.noFurtherResponsesText);
 		} else { //this was third association
 			disableKeyListener();
 		}
@@ -193,16 +202,45 @@ public class ExperimentPanel extends JPanel {
 		repaint();	
 	}
 	
+	private class SkipButton extends JButton {
+		private static final String unknownText = "Onbekend woord";
+		private static final String noFurtherResponsesText = "Geen verdere antwoorden";
+		public String text;
+		
+		private SkipButton() {
+			super(unknownText);
+			text = unknownText;
+			
+			this.addActionListener(new ActionListener() { public void actionPerformed(ActionEvent arg0) { 
+				disableKeyListener();
+				if (text == unknownText) {
+					Experiment.xp.skipFurtherAssociations("__UNKNOWN__");
+				} else if (text == noFurtherResponsesText) {
+					Experiment.xp.skipFurtherAssociations("__NO_FURTHER_RESPONSES__");
+				} else {
+					Experiment.xp.skipFurtherAssociations("__ERROR_(this should no be here)__");
+				}
+			}});	
+		}
+		
+		public void setState(String state) {
+			this.text = state;
+			this.setText(text);
+		}
+		
+	}
+	
 	private class ReponseDispatcher implements KeyEventDispatcher {
         @Override
         public boolean dispatchKeyEvent(KeyEvent e) {
             if (e.getID() == KeyEvent.KEY_RELEASED) {            	
-            	if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+            	if (e.getKeyCode() == KeyEvent.VK_ENTER) { //user pressed enter: try to submit response
             		if (responseField.getText().length() > 0) {            			
             			submitResponse(responseField.getText());
             		}
             	} else {
             		if (listenToFirstKeypress) {
+            			Experiment.xp.removeResponseTimer();
             			listenToFirstKeypress = false;
             			timeAtAssociationsFirstKeypress = System.currentTimeMillis();
             		}

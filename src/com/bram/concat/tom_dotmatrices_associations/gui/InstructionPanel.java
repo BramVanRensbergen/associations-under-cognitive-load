@@ -103,7 +103,7 @@ public class InstructionPanel extends JPanel {
 		mainButton.addActionListener(new ActionListener() { public void actionPerformed(ActionEvent arg0) { //on click, close the gui		
 			Experiment.xp.displayAndContinue(); 
 		}});
-		setInstructions(Text.firstBlockPostTrainingInstructions);	
+		setInstructions(Text.postTrainingInstructions);	
 	}
 	
 	public void showInterBlockInstructions() {

@@ -35,33 +35,30 @@ public abstract class Text {
 		+ "Na enige tijd krijg je een leeg 4 bij 4 veld te zien waarin je vervolgens het originele patroon moet invullen. "
 		+ "Dit doe je door met de muis op de velden te klikken waarin volgens jou een punt moet verschijnen. "
 		+ "Als je per ongeluk een punt op de foute plaats hebt ingevuld, kan je dit terug verwijderen door er een tweede maal op te klikken. "
-		+ "Het is de bedoeling dat je zo accuraat mogelijk werkt. "
-//		,
-//		
-//				"Dus je krijgt eerst een patroon te zien dat je moet onthouden en later krijg je een leeg veld te zien waarin je het patroon moet invullen. "
-//			+ "In de tijd daartussen, ga je een tweede opdracht krijgen.<br>"
-//			+ "Hierbij ga je voor een korte tijd een woord in hoofdletters te zien krijgen (bvb. 'NAGEL') en vervolgens een letterreeks in kleine letters. "
-//			+ "Deze letters vormen een bestaand Nederlands woord (bvb. 'otter') of een onbestaand woord (bvb. 'schuik'). "
-//			+ "Jouw taak is om het woord in hoofdletters aandachtig te bekijken en daarna voor de letterreeks in kleine letters aan "
-//			+ "te geven of het een bestaand woord of een onbestaand woord is."
-//			+ "<br>Dit doe je door op het toetsenbord op de pijltjestoetsen te drukken. "
-//			+ "De pijl naar links staat voor bestaand woord, de pijl naar rechts staat voor onbestaand woord. "
-//			+ "Dus bij 'otter' zou je op de pijl naar links moeten drukken en bij 'schuik' zou je op de pijl naar rechts moeten drukken. "
-//			+ "Het is de bedoeling dat je zo snel en accuraat mogelijk antwoordt. Dit wordt vijf keer herhaald. "
-//			+ "Na de vijfde keer krijg je het lege veld te zien waarin je het puntenpatroon moet invullen.",
-//		
-//			"Zowel voor de geheugentaak als voor de woordtaak is het de bedoeling dat je zo <b>accuraat</b> mogelijk bent. "
-//			+ "Voor de woordtaak is het daarnaast ook de bedoeling dat je zo <b>snel</b> mogelijk antwoordt. "
-//			+ "Snelheid is niet belangrijk in de geheugentaak. Beide taken zijn even belangrijk."
-//			+ "Eerst zal je de procedure kunnen oefenen in een oefenfase."
+		+ "Het is de bedoeling dat je zo accuraat mogelijk werkt. ",
+		
+		"Dus je krijgt eerst een patroon te zien dat je moet onthouden en later krijg je een leeg veld te zien waarin je het patroon moet invullen. "
+		+ "In de tijd daartussen, ga je een tweede opdracht krijgen." 
+		+ "<br><br>Hierbij gaat er gevraagd worden om <b>drie</b> associaties te geven bij een bepaald woord. Concreet zal je bovenaan een woord te zien krijgen met daaronder een leeg vakje. "
+		+ "Het is de bedoeling dat je in dat vakje de <b>eerste</b> associatie schrijft die direct bij je opkomt als je dit woord leest. Hiervoor kan je gewoon het toetsenbord gebruiken en "
+		+ "wanneer je de associatie hebt ingetypt, druk je op ENTER. Vervolgens zal er nieuw leeg vakje verschijnen waarin je de <b>tweede</b> associatie kan invullen. Wanneer je dit hebt "
+		+ "gedaan en opnieuw op ENTER hebt gedrukt, verschijnt er weer een leeg vakje voor de <b>derde</b> associatie. Druk je ten slotte nogmaals op ENTER verschijnt er een nieuw woord "
+		+ "waarvoor je drie associaties moet geven." 
+		+ "<br><br>Belangrijk: Geef enkel associaties voor het woord dat bovenaan getoond wordt (niet op basis van een vorig antwoord) en vermijd het gebruik van zinnen. "
+		+ "Klik op de Onbekend Woord knop rechtsonder als je het woord niet kent en op de Geen associatie knop als je geen andere associaties vlot kan bedenken.",
+
+		"Voor de geheugentaak is het de bedoeling dat je zo <b>accuraat</b> mogelijk bent. Voor de associatietaak is het daarnaast ook de bedoeling dat je zo <b>snel</b> mogelijk antwoordt, "
+		+ "als je te lang wacht verschijnt de boodschap “Te traag!”. Snelheid is niet belangrijk in de geheugentaak. Beide taken zijn even belangrijk. Eerst zal je de procedure "
+		+ "kunnen oefenen in een oefenfase." 		
+
 			}; 
 
 	
 	/**
 	 * Displayed after the training phase, and before the actual experiment.
 	 */
-	public static final String firstBlockPostTrainingInstructions =
-			"Nu begint het echte experiment.";
+	public static final String postTrainingInstructions =
+			"Nu begint het echte experiment. Het experiment bestaat uit drie delen, tussenin heb je de mogelijkheid om te pauzeren. Mocht je nog vragen hebben, roep dan de proefleider.";
 	
 	public static final String interBlockInstructions = "Je kan nu even pauzeren. Klik op 'Klaar' als je aan het volgende deel wil beginnen.";
 	
