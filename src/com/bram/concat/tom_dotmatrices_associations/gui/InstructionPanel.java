@@ -106,13 +106,21 @@ public class InstructionPanel extends JPanel {
 		setInstructions(Text.postTrainingInstructions);	
 	}
 	
-	public void showInterBlockInstructions() {
+	/**
+	 * @param lastblock Show the instructions for the last block
+	 * Last block: generally slightly different from previous interblock instructions, e.g. they may refer to the upcoming block as the last one instead of the next one.
+	 */
+	public void showInterBlockInstructions(boolean lastblock) {
 		mainButton.setText("Verder Gaan");
 		removeActionListeners(mainButton);
 		mainButton.addActionListener(new ActionListener() { public void actionPerformed(ActionEvent arg0) { //on click, close the gui		
 			Experiment.xp.displayAndContinue(); 
 		}});
-		setInstructions(Text.interBlockInstructions);	
+		if (lastblock) {
+			setInstructions(Text.interBlockInstructionsLast);
+		} else {
+			setInstructions(Text.interBlockInstructions);
+		}
 	}
 	
 	public void showXpOverText() {

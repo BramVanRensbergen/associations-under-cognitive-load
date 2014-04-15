@@ -155,8 +155,9 @@ public class Experiment {
 			} else {
 				if (globalTrialGroupNb > 0 && experimentPhase == XP && (globalTrialGroupNb % (nbOfTrialGroups / Options.N_BLOCKS) == 0)) {
 					//pp should take a break!
-					experimentPhase = INTERBLOCK_INSTRUCTIONS;					
-					gui.instructionPanel.showInterBlockInstructions();
+					experimentPhase = INTERBLOCK_INSTRUCTIONS;	
+					boolean lastblock = globalTrialGroupNb == nbOfTrialGroups * (Options.N_BLOCKS - 1) / Options.N_BLOCKS; // TRUE if the upcoming block is the last one
+					gui.instructionPanel.showInterBlockInstructions(lastblock);
 				} else {
 					//just show the next trialGroup!
 					if (experimentPhase == INTERBLOCK_INSTRUCTIONS) {

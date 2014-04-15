@@ -21,7 +21,7 @@ public abstract class Text {
 	/**
 	 * Headers i.e. first line of every datafile.
 	 */
-	public static final String headers = "trialNb\tgroupNb\tindexInGroup\tcue\tassociation\tassoNb\ttimeToFirstKeypress\ttimeToSubmission\tlist\tset\t"
+	public static final String headers = "trialNb\tgroupNb\tindexInGroup\tcue\tassociation\tassoNb\ttimeToFirstKeypress\ttimeToSubmission\tlist\t"
 			+ "load\toriginal_pattern\treproduced_pattern\tcorrect\thits\tmisses\tfalseAlarms";
 	
 	/**
@@ -41,7 +41,7 @@ public abstract class Text {
 		+ "In de tijd daartussen, ga je een tweede opdracht krijgen." 
 		+ "<br><br>Hierbij gaat er gevraagd worden om <b>drie</b> associaties te geven bij een bepaald woord. Concreet zal je bovenaan een woord te zien krijgen met daaronder een leeg vakje. "
 		+ "Het is de bedoeling dat je in dat vakje de <b>eerste</b> associatie schrijft die direct bij je opkomt als je dit woord leest. Hiervoor kan je gewoon het toetsenbord gebruiken en "
-		+ "wanneer je de associatie hebt ingetypt, druk je op ENTER. Vervolgens zal er nieuw leeg vakje verschijnen waarin je de <b>tweede</b> associatie kan invullen. Wanneer je dit hebt "
+		+ "wanneer je de associatie hebt ingetypt, druk je op ENTER. Vervolgens zal er een nieuw leeg vakje verschijnen waarin je de <b>tweede</b> associatie kan invullen. Wanneer je dit hebt "
 		+ "gedaan en opnieuw op ENTER hebt gedrukt, verschijnt er weer een leeg vakje voor de <b>derde</b> associatie. Druk je ten slotte nogmaals op ENTER verschijnt er een nieuw woord "
 		+ "waarvoor je drie associaties moet geven." 
 		+ "<br><br>Belangrijk: Geef enkel associaties voor het woord dat bovenaan getoond wordt (niet op basis van een vorig antwoord) en vermijd het gebruik van zinnen. "
@@ -61,6 +61,7 @@ public abstract class Text {
 			"Nu begint het echte experiment. Het experiment bestaat uit drie delen, tussenin heb je de mogelijkheid om te pauzeren. Mocht je nog vragen hebben, roep dan de proefleider.";
 	
 	public static final String interBlockInstructions = "Je kan nu even pauzeren. Klik op 'Klaar' als je aan het volgende deel wil beginnen.";
+	public static final String interBlockInstructionsLast = "Je kan nu even pauzeren. Klik op 'Klaar' als je aan het laatste deel wil beginnen.";
 	
 	
 	/**
