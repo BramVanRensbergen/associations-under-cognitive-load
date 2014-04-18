@@ -53,7 +53,7 @@ public abstract class Options {
 	/**
 	 * Participants have this many MS to give each association; any longer, and the program skips to the next trial.
 	 */
-	public static final int MAX_RESPONSE_DURATION = (DEBUG ? 1000 : 10000);
+	public static final int MAX_RESPONSE_DURATION = (DEBUG ? 1000 : 7000);
 	
 	/**
 	 * When participants answer too slowly, an error is displayed for this many MS before moving on.

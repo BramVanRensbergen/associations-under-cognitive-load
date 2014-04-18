@@ -14,6 +14,7 @@ public abstract class Text {
 	 */
 	public static final Font instructionFont = new Font("Serif", Font.PLAIN, 24);
 	public static final Font cueFont = new Font("Serif", Font.PLAIN, 50);
+	public static final Font tooLateFont = new Font("Serif", Font.PLAIN, 60);
 	public static final Font prevAssoFont = new Font("Serif", Font.PLAIN, 30);
 	public static final Font assoTextfieldFont = new Font("Serif", Font.PLAIN, 40);
 	

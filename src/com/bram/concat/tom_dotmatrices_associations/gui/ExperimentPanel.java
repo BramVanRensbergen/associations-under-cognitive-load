@@ -30,13 +30,18 @@ public class ExperimentPanel extends JPanel {
 	/**
 	 * The cue to which the ss is asked to give associations.
 	 */
-	private JLabel cue;
+	private JLabel cueLabel;
 		
 	/**
 	 * Text that displays the participants first two responses to the cue.
 	 */
 	private JLabel[] previousAssociationLabels;   
 
+	/**
+	 * Displays an error if participant responds too slowly.
+	 */
+	private JLabel tooLateLabel;
+	
 	/**
 	 * Ss enters their responses i.e. associations in this.
 	 */
@@ -78,11 +83,11 @@ public class ExperimentPanel extends JPanel {
 		setLayout(null);
 		setVisible(true);	
 		
-		cue = new JLabel("");
-		cue.setHorizontalAlignment(SwingConstants.CENTER);
-		cue.setBounds(Options.screenSize.width / 2 - 400 / 2, 100, 400, 100);
-		cue.setFont(Text.cueFont);
-		
+		cueLabel = new JLabel("");
+		cueLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		cueLabel.setBounds(Options.screenSize.width / 2 - 400 / 2, 100, 400, 100);
+		cueLabel.setFont(Text.cueFont);
+			
 		previousAssociationLabels = new JLabel[Options.N_ASSOCIATIONS - 1];
 		for (int i = 0; i < Options.N_ASSOCIATIONS - 1; i++) {
 			previousAssociationLabels[i] = new JLabel("");
@@ -91,6 +96,12 @@ public class ExperimentPanel extends JPanel {
 			previousAssociationLabels[i].setForeground(Color.gray);
 			previousAssociationLabels[i].setFont(Text.prevAssoFont);
 		}
+		
+		tooLateLabel = new JLabel("Te traag!");
+		tooLateLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		tooLateLabel.setBounds(Options.screenSize.width / 2 - 400 / 2, 300, 400, 100);
+		tooLateLabel.setFont(Text.tooLateFont);
+		tooLateLabel.setForeground(Color.red);
 
 		responseField = new JTextField(50);
 		responseField.setBounds(Options.screenSize.width/2 - 200 / 2, Options.screenSize.height - 500, 200, 55);
@@ -145,9 +156,9 @@ public class ExperimentPanel extends JPanel {
 	
 	public void showCue(String word) {
 		removeAll();
-		cue.setForeground(Color.black);
-		cue.setText(word);
-		add(cue);
+		cueLabel.setForeground(Color.black);
+		cueLabel.setText(word);
+		add(cueLabel);
 		skipButton.setState(SkipButton.unknownText);
 		add(skipButton);
 		responseField.setText("");
@@ -166,10 +177,7 @@ public class ExperimentPanel extends JPanel {
 	
 	public void showTooLateError() {
 		removeAll();
-		cue.setForeground(Color.red);
-		cue.setText("Te traag!");
-		add(cue);
-		
+		add(tooLateLabel);		
 		validate();
 		repaint();
 	}
