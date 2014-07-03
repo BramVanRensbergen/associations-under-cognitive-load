@@ -71,7 +71,7 @@ public class InstructionPanel extends JPanel {
 		textPane.setEditable(false);
 		textPane.setBackground(getBackground());     //set backgroundcolor to parent's background
 		textPane.putClientProperty(JEditorPane.HONOR_DISPLAY_PROPERTIES, Boolean.TRUE);
-		textPane.setFont(Text.instructionFont);
+		textPane.setFont(Text.FONT_INSTRUCTIONS);
 		
 		JScrollPane paneScrollPane = new JScrollPane(textPane);
         paneScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED); //hopefully we never need scrollbars, but just in case
@@ -80,9 +80,9 @@ public class InstructionPanel extends JPanel {
 		paneScrollPane.setBounds((int) (Options.screenSize.getWidth() / 2 - width / 2), 100, width, height); //centered
         add(paneScrollPane); //add instructions
         
-        mainButton = new JButton("Beginnen"); 
-		previousButton = new JButton("Vorige");
-		nextButton = new JButton("Volgende");
+        mainButton = new JButton(Text.BTN_BEGIN); 
+		previousButton = new JButton(Text.BTN_PREVIOUS);
+		nextButton = new JButton(Text.BTN_NEXT);
 		
 		mainButton.setVisible(false);
 		previousButton.setVisible(false);
@@ -107,9 +107,9 @@ public class InstructionPanel extends JPanel {
 		removeActionListeners(nextButton);
 		removeActionListeners(previousButton);
 		
-		if (pageIndex < Text.mainInstructions.length) { 
+		if (pageIndex < Text.TEXT_INSTRUCTIONS.length) { 
 			//not last page
-			nextButton.setText("Volgende");
+			nextButton.setText(Text.BTN_NEXT);
 			nextButton.setVisible(true);
 			nextButton.addActionListener(new ActionListener() { public void actionPerformed(ActionEvent arg0) { //on click, close the gui		
 				showMainInstructions(pageIndex + 1);
@@ -118,7 +118,7 @@ public class InstructionPanel extends JPanel {
 		
 		if (pageIndex > 1) { 
 			//not first page
-			previousButton.setText("Vorige");
+			previousButton.setText(Text.BTN_PREVIOUS);
 			previousButton.setVisible(true);
 			previousButton.addActionListener(new ActionListener() { public void actionPerformed(ActionEvent arg0) { //on click, close the gui		
 				showMainInstructions(pageIndex - 1);
@@ -127,9 +127,9 @@ public class InstructionPanel extends JPanel {
 			previousButton.setVisible(false);
 		}
 		
-		if (pageIndex == Text.mainInstructions.length) { 
+		if (pageIndex == Text.TEXT_INSTRUCTIONS.length) { 
 			//last page			
-			nextButton.setText("Beginnen");
+			nextButton.setText(Text.BTN_BEGIN);
 			nextButton.setVisible(true);
 			nextButton.addActionListener(new ActionListener() { public void actionPerformed(ActionEvent arg0) { //on click, close the gui		
 				previousButton.setVisible(false);
@@ -137,17 +137,17 @@ public class InstructionPanel extends JPanel {
 				Experiment.xp.displayAndContinue(); 
 			}});
 		}				
-		setInstructions(Text.mainInstructions[pageIndex - 1]);		
+		setInstructions(Text.TEXT_INSTRUCTIONS[pageIndex - 1]);		
 	}
 	
 	public void showFirstBlockPostTrainingInstructions() {
 		mainButton.setVisible(true);
-		mainButton.setText("Verder Gaan");
+		mainButton.setText(Text.BTN_CONTINUE);
 		removeActionListeners(mainButton);
 		mainButton.addActionListener(new ActionListener() { public void actionPerformed(ActionEvent arg0) { //on click, close the gui		
 			Experiment.xp.displayAndContinue(); 
 		}});
-		setInstructions(Text.postTrainingInstructions);	
+		setInstructions(Text.TEXT_POSTTRAINING_INSTRUCTIONS);	
 	}
 	
 	/**
@@ -155,26 +155,26 @@ public class InstructionPanel extends JPanel {
 	 * Last block: generally slightly different from previous interblock instructions, e.g. they may refer to the upcoming block as the last one instead of the next one.
 	 */
 	public void showInterBlockInstructions(boolean lastblock) {
-		mainButton.setText("Verder Gaan");
+		mainButton.setText(Text.BTN_CONTINUE);
 		removeActionListeners(mainButton);
 		mainButton.addActionListener(new ActionListener() { public void actionPerformed(ActionEvent arg0) { //on click, close the gui		
 			Experiment.xp.displayAndContinue(); 
 		}});
 		if (lastblock) {
-			setInstructions(Text.interBlockInstructionsLast);
+			setInstructions(Text.TEXT_INTERBLOCK_LAST);
 		} else {
-			setInstructions(Text.interBlockInstructions);
+			setInstructions(Text.TEXT_INTERBLOCK);
 		}
 	}
 	
 	public void showXpOverText() {
-		mainButton.setText("Afsluiten");
+		mainButton.setText(Text.BTN_QUIT);
 		removeActionListeners(mainButton);
 		mainButton.addActionListener(new ActionListener() { public void actionPerformed(ActionEvent arg0) { //on click, close the gui		
 			Experiment.gui.dispose(); 		//remove the layout
 	        System.exit(0); //exit	
 		}});
-		setInstructions(Text.xpOverText);			
+		setInstructions(Text.TEXT_XP_OVER_MESSAGE);			
 	}
 	
 	private void setInstructions(String text){

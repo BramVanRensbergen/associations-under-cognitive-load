@@ -24,6 +24,7 @@ import java.util.Arrays;
 /**
  * Check whether an indicated pattern of dots would be accepted by the algorithm described in:
  * Garner, W.R., & Clement, D. E. (1963). Goodness of Pattern and Pattern Uncertainty. Journal of Verbal Learning and Verbal Behavior 2, 446-452.
+ * In short: mirroring or rotating the pattern may not result in a duplicate.
  */
 public abstract class MirrorAndRotation {
 	

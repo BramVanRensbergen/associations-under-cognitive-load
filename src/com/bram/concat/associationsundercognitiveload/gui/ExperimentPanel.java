@@ -57,7 +57,7 @@ public class ExperimentPanel extends JPanel {
 	/**
 	 * Displays an error if participant responds too slowly.
 	 */
-	private JLabel tooLateLabel;
+	private JLabel tooSlowLabel;
 	
 	/**
 	 * Ss enters their responses i.e. associations in this.
@@ -103,7 +103,7 @@ public class ExperimentPanel extends JPanel {
 		cueLabel = new JLabel("");
 		cueLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		cueLabel.setBounds(Options.screenSize.width / 2 - 400 / 2, 100, 400, 100); //center top
-		cueLabel.setFont(Text.cueFont);
+		cueLabel.setFont(Text.FONT_CUE);
 			
 		previousAssociationLabels = new JLabel[Options.N_ASSOCIATIONS - 1];
 		for (int i = 0; i < Options.N_ASSOCIATIONS - 1; i++) {
@@ -111,23 +111,23 @@ public class ExperimentPanel extends JPanel {
 			previousAssociationLabels[i].setHorizontalAlignment(SwingConstants.CENTER);
 			previousAssociationLabels[i].setBounds(Options.screenSize.width / 2 - 400 / 2, 150 + (1 + i) * 50, 400, 50); //mid top, below cue
 			previousAssociationLabels[i].setForeground(Color.gray);
-			previousAssociationLabels[i].setFont(Text.prevAssoFont);
+			previousAssociationLabels[i].setFont(Text.FONT_PREVIOUS_RESPONSES);
 		}
 		
-		tooLateLabel = new JLabel("Te traag!");
-		tooLateLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		tooLateLabel.setBounds(Options.screenSize.width / 2 - 400 / 2, 300, 400, 100);
-		tooLateLabel.setFont(Text.tooLateFont);
-		tooLateLabel.setForeground(Color.red);
+		tooSlowLabel = new JLabel(Text.TEXT_TOO_SLOW);
+		tooSlowLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		tooSlowLabel.setBounds(Options.screenSize.width / 2 - 400 / 2, 300, 400, 100);
+		tooSlowLabel.setFont(Text.FONT_TOO_SLOW_MESSAGE);
+		tooSlowLabel.setForeground(Color.red);
 
 		responseField = new JTextField(50);
 		responseField.setBounds(Options.screenSize.width/2 - 200 / 2, Options.screenSize.height - 300, 200, 55); //center bottom
-		responseField.setFont(Text.assoTextfieldFont);
+		responseField.setFont(Text.FONT_ANSWER_TEXTFIELD);
 		
 		skipButton = new SkipButton();
 		skipButton.setBounds(Options.screenSize.width - 200 - 75, Options.screenSize.height - 50 - 75, 200, 50); //right bottom
 		
-		patternReproductionDoneButton = new JButton("Klaar"); //add ok button, to end pattern reproduction (not displayed yet)
+		patternReproductionDoneButton = new JButton(Text.BTN_READY); //add ok button, to end pattern reproduction (not displayed yet)
 		patternReproductionDoneButton.addActionListener(new ActionListener() { public void actionPerformed(ActionEvent arg0) { //on click, start the experiment		
 			Experiment.xp.correctPatternReproduction();
 		}});
@@ -183,7 +183,7 @@ public class ExperimentPanel extends JPanel {
 		removeAll();
 		cueLabel.setText(word);
 		add(cueLabel);
-		skipButton.setState(SkipButton.unknownText);
+		skipButton.setState(Text.BTN_UNKNOWN_CUE);
 		add(skipButton);
 		responseField.setText(""); //remove previous answer
 		add(responseField);
@@ -203,9 +203,9 @@ public class ExperimentPanel extends JPanel {
 	 * Displayed if participant does not start typing within  {@code Options.MAX_RESPONSE_DURATION} MS.
 	 * Count starts when the cue is displayed, or when they submitted a previous association to the cue.
 	 */
-	public void showTooLateError() {
+	public void showTooSlowError() {
 		removeAll();
-		add(tooLateLabel);		
+		add(tooSlowLabel);		
 		validate();
 		repaint();
 	}	
@@ -220,7 +220,7 @@ public class ExperimentPanel extends JPanel {
 			// this was first or second association	
 			previousAssociationLabels[Experiment.xp.currentAssociationIndex - 1].setText(a); //-1 because that var is 1..3 and the array is 0..2		
 			listenToFirstKeypress = true;
-			skipButton.setState(SkipButton.noFurtherResponsesText);
+			skipButton.setState(Text.BTN_NO_FURTHER_RESPONSES);
 		} else { 
 			//this was third association
 			disableKeyListener();
@@ -240,19 +240,18 @@ public class ExperimentPanel extends JPanel {
 	}
 	
 	private class SkipButton extends JButton {
-		private static final String unknownText = "Onbekend woord";
-		private static final String noFurtherResponsesText = "Geen verdere antwoorden";
+
 		public String text;
 		
 		private SkipButton() {
-			super(unknownText);
-			text = unknownText;
+			super(Text.BTN_UNKNOWN_CUE);
+			text = Text.BTN_UNKNOWN_CUE;
 			
 			this.addActionListener(new ActionListener() { public void actionPerformed(ActionEvent arg0) { 
 				disableKeyListener();
-				if (text == unknownText) {
+				if (text == Text.BTN_UNKNOWN_CUE) {
 					Experiment.xp.skipFurtherAssociations("__UNKNOWN__");
-				} else if (text == noFurtherResponsesText) {
+				} else if (text == Text.BTN_NO_FURTHER_RESPONSES) {
 					Experiment.xp.skipFurtherAssociations("__NO_FURTHER_RESPONSES__");
 				} else {
 					Experiment.xp.skipFurtherAssociations("__ERROR_(this should no be here)__");

@@ -29,6 +29,7 @@ import java.awt.image.BufferedImage;
 import javax.swing.JFrame;
 
 import com.bram.concat.associationsundercognitiveload.Options;
+import com.bram.concat.associationsundercognitiveload.Text;
 
 /**
  * Class to assist with the layout of the experiment.
@@ -59,7 +60,7 @@ public class Gui extends JFrame {
 	 * Initialize the layout
 	 */
 	public Gui() {
-		setTitle("Experiment");							//set the application's title
+		setTitle(Text.TEXT_WINDOW_TITLE);					//set the application's title
 		setUndecorated(!Options.DECORATED);				//removes title bar and close buttons if necessary
 		setExtendedState(Frame.MAXIMIZED_BOTH);
 		setSize(Options.screenSize);

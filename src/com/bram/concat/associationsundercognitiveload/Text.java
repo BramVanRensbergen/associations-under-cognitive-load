@@ -24,48 +24,108 @@ import java.util.Calendar;
 
 /**
  * Helper class that contains text displayed in the instructions and in the goodbye message, font settings, datafile headers, ...
- * These messages are all hardcoded here, probably not the most elegant solution but it is what it is...
+ * All text that is displayed to the participant is written here, so if you wish to translate the experiment, you should only need this file.
+ * Some
  */
 public abstract class Text {
 	
 	/**
-	 * Font used in all instruction screens and in the goodbye screen.
+	 * Label for the ID form entry.
 	 */
-	public static final Font instructionFont = new Font("Serif", Font.PLAIN, 24);
+	public static final String FORM_ID = "Proefpersoon-nr (vraag aan proefleider): ";
 	
 	/**
-	 * The cue is displayed in this font.
+	 * Label for the age form entry.
 	 */
-	public static final Font cueFont = new Font("Serif", Font.PLAIN, 50);
+	public static final String FORM_AGE = "Leeftijd: ";
 	
 	/**
-	 * The previous associations of this participant to the current cue are displayed in this font.
+	 * Label for the gender form entry.
 	 */
-	public static final Font prevAssoFont = new Font("Serif", Font.PLAIN, 30);
+	public static final String FORM_GENDER = "Geslacht: ";
 	
 	/**
-	 * The text-field in which the participant gives association is formatted in this font.
+	 * Label for the 'male' radiobutton.
 	 */
-	public static final Font assoTextfieldFont = new Font("Serif", Font.PLAIN, 40);
+	public static final String FORM_MALE = "Man";
 	
 	/**
-	 * The errormessage when participant is too slow is displayed in this font.
+	 * Label for the 'female' radiobutton.
 	 */
-	public static final Font tooLateFont = new Font("Serif", Font.PLAIN, 60);
-
+	public static final String FORM_FEMALE = "Vrouw";
+	
+	/**
+	 * Error displayed when user's ID is not valid.
+	 */
+	public static final String FORM_ERROR_ID = "Gelieve je proefpersoon-nummer correct in te geven! (Enkel cijfers.)";
+	
+	/**
+	 * Error displayed when user's age is not valid.
+	 */
+	public static final String FORM_ERROR_AGE = "Gelieve je leeftijd correct in te geven! (Enkel cijfers.)";
+	
+	/**
+	 * Error displayed when user's gender is not valid.
+	 */
+	public static final String FORM_ERROR_GENDER = "Je hebt je geslacht nog niet aangeduid!";
 	
 	
 	/**
-	 * Output headers i.e. first line of every datafile.
+	 * Label for the button the participant uses to indicate he/she is ready to progress to the next screen.
 	 */
-	public static final String headers = "trialNb\tgroupNb\tindexInGroup\tcue\tassociation\tassoNb\ttimeToFirstKeypress\ttimeToSubmission\tlist\t"
-			+ "load\toriginal_pattern\treproduced_pattern\tcorrect\thits\tmisses\tfalseAlarms";
+	public static final String BTN_READY = "Klaar";
+	
+	/**
+	 * Label for the button the participant uses to indicate he/she is ready to begin the experiment.
+	 */
+	public static final String BTN_BEGIN = "Beginnen";
+	
+	/**
+	 * Label for the button the participant uses to indicate he/she is ready to progress to the next screen.
+	 */
+	public static final String BTN_CONTINUE = "Verder Gaan";
+	
+	/**
+	 * Label for the button the participant uses to go to the previous instructions screen.
+	 */
+	public static final String BTN_PREVIOUS = "Vorige";
+	
+	/**
+	 * Label for the button the participant uses to go to the next instructions screen.
+	 */
+	public static final String BTN_NEXT = "Volgende";
+	
+	/**
+	 * Label for the button the participant uses to quit the program (at the end).
+	 */
+	public static final String BTN_QUIT = "Afsluiten";
+	
+	/**
+	 * Label for the button the participant uses to indicate he/she does not know the cue word.
+	 */
+	public static final String BTN_UNKNOWN_CUE = "Onbekend woord";
+	
+	/**
+	 * Label for the button the participant uses to indicate he/she does not have any further associations to the cue word.
+	 */
+	public static final String BTN_NO_FURTHER_RESPONSES = "Geen verdere antwoorden";
+	
+	/**
+	 * Title of the program (in your OS).
+	 */
+	public static final String TEXT_WINDOW_TITLE = "Experiment";
+	
+	/**
+	 * Message that is displayed when participant responds too slowly.
+	 */
+	public static final String TEXT_TOO_SLOW = "Te traag!";
 	
 	/**
 	 * Displayed at the beginning of the experiment, after having asked the ss information. After this, the training phase starts.
+	 * Each String is displayed as a separate screen.
 	 * Uses HTML formatting.
 	 */
-	public static final String[] mainInstructions = {  
+	public static final String[] TEXT_INSTRUCTIONS = {  
 		"Welkom."+
 		"<br><br>In dit experiment zal je twee dingen moeten doen. "
 		+ "<br><br>Eerst zal je een 4 bij 4 veld te zien krijgen waarin een aantal punten staan. "
@@ -94,28 +154,62 @@ public abstract class Text {
 	/**
 	 * Displayed after the training phase, and before the actual experiment.
 	 */
-	public static final String postTrainingInstructions =
+	public static final String TEXT_POSTTRAINING_INSTRUCTIONS =
 			"Nu begint het echte experiment. Het experiment bestaat uit drie delen, tussenin heb je de mogelijkheid om te pauzeren. Mocht je nog vragen hebben, roep dan de proefleider.";
 		
 	/**
 	 * Displayed between two blocks, but not before the last block.
 	 */
-	public static final String interBlockInstructions = "Je kan nu even pauzeren. Klik op 'Klaar' als je aan het volgende deel wil beginnen.";
+	public static final String TEXT_INTERBLOCK = "Je kan nu even pauzeren. Klik op 'Klaar' als je aan het volgende deel wil beginnen.";
 	
 	/**
 	 * Displayed before the last block.
 	 */
-	public static final String interBlockInstructionsLast = "Je kan nu even pauzeren. Klik op 'Klaar' als je aan het laatste deel wil beginnen.";
+	public static final String TEXT_INTERBLOCK_LAST = "Je kan nu even pauzeren. Klik op 'Klaar' als je aan het laatste deel wil beginnen.";
 		
 	/**
 	 * Displayed at the end of the experiment.
 	 * Uses HTML formatting.
 	 */
-	public static final String xpOverText = 
+	public static final String TEXT_XP_OVER_MESSAGE = 
 			"<br><br><br><br>Het experiment is afgelopen." +
 			"<br><br>Bedankt voor je medewerking!" +
 			"<br><br>Je mag het programma nu sluiten.";
 
+	/**
+	 * Output headers i.e. first line of every datafile.
+	 */
+	public static final String HEADERS = "trialNb\tgroupNb\tindexInGroup\tcue\tassociation\tassoNb\ttimeToFirstKeypress\ttimeToSubmission\tlist\t"
+			+ "load\toriginal_pattern\treproduced_pattern\tcorrect\thits\tmisses\tfalseAlarms";
+	
+	
+	/**
+	 * Font used in all instruction screens and in the goodbye screen.
+	 */
+	public static final Font FONT_INSTRUCTIONS = new Font("Serif", Font.PLAIN, 24);
+	
+	/**
+	 * The cue is displayed in this font.
+	 */
+	public static final Font FONT_CUE = new Font("Serif", Font.PLAIN, 50);
+	
+	/**
+	 * The previous associations of this participant to the current cue are displayed in this font.
+	 */
+	public static final Font FONT_PREVIOUS_RESPONSES = new Font("Serif", Font.PLAIN, 30);
+	
+	/**
+	 * The text-field in which the participant gives association is formatted in this font.
+	 */
+	public static final Font FONT_ANSWER_TEXTFIELD = new Font("Serif", Font.PLAIN, 40);
+	
+	/**
+	 * The errormessage when participant is too slow is displayed in this font.
+	 */
+	public static final Font FONT_TOO_SLOW_MESSAGE = new Font("Serif", Font.PLAIN, 60);
+
+	
+	
 	/**
 	 * @return The current month and day, formatted as a string, seperated by an underscore.
 	 */

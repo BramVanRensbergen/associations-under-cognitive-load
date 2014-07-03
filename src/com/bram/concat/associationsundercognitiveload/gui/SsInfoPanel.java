@@ -32,6 +32,7 @@ import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
 import com.bram.concat.associationsundercognitiveload.Options;
+import com.bram.concat.associationsundercognitiveload.Text;
 import com.bram.concat.associationsundercognitiveload.experiment.Experiment;
 
 /**
@@ -61,15 +62,15 @@ public class SsInfoPanel extends JPanel {
 		int h = 25; 			//height of each field
 		int space = 5; 			//space between fields
 		
-		JLabel snLabel = new JLabel("Proefpersoon-nr (vraag aan proefleider): ", JLabel.TRAILING);	//create text-labels	
-		JLabel ageLabel = new JLabel("Leeftijd: ", JLabel.TRAILING);
-		JLabel sexLabel = new JLabel("Geslacht: ", JLabel.TRAILING);
+		JLabel snLabel = new JLabel(Text.FORM_ID, JLabel.TRAILING);	//create text-labels	
+		JLabel ageLabel = new JLabel(Text.FORM_AGE, JLabel.TRAILING);
+		JLabel sexLabel = new JLabel(Text.FORM_GENDER, JLabel.TRAILING);
 		
 		snTextField = new JTextField(10); //create fields for user to answer in
 		ageTextField = new JTextField(10);
 		JPanel genderRadio = getGenderPanel(); //get the gender radio-buttons
 	
-		JButton infoDone = new JButton("OK"); //add ok button, to go to next screen
+		JButton infoDone = new JButton(Text.BTN_READY); //add ok button, to go to next screen
 		infoDone.addActionListener(new infoListener()); //make sure pressing the button will only advance to the next screen when all info has been entered
 		
 		add(snLabel); //add everything to the panel
@@ -100,13 +101,13 @@ public class SsInfoPanel extends JPanel {
 	 * Creates and returns two radio-buttons to select the users gender.
 	 */
 	private JPanel getGenderPanel() {	
-		JRadioButton maleButton = new JRadioButton("Man"); //create the 'male' button
+		JRadioButton maleButton = new JRadioButton(Text.FORM_MALE); //create the 'male' button
 	    maleButton.addActionListener(new ActionListener() { public void actionPerformed(ActionEvent e)   { 
 	    	//if button is clicked, set gender to male
 	    	gender = 'm'; }   
 	    }); 
 	
-	    JRadioButton femaleButton = new JRadioButton("Vrouw"); //create the 'female' button
+	    JRadioButton femaleButton = new JRadioButton(Text.FORM_FEMALE); //create the 'female' button
 	    femaleButton.addActionListener(new ActionListener() { public void actionPerformed(ActionEvent e)   { 
 	    	//if button is clicked, set gender to female
 	    	gender = 'f'; }   
@@ -130,25 +131,25 @@ public class SsInfoPanel extends JPanel {
 		public void actionPerformed(ActionEvent e) {	
 			boolean valid = true; 	//used to keep track of whether all conditions are still valid
 			String errorString = "";//used to keep track of all errors
-				
+			
 			int ssNb = -1;
 			try {
 				ssNb = Integer.parseInt(snTextField.getText()); //read age from its text field, check if it is a valid number
 			} catch(NumberFormatException error) {  //wasn't a valid number: age remains at -1
-				errorString += "Gelieve je proefpersoon-nummer correct in te geven! (Enkel cijfers.)\n\n"; //add error
+				errorString += Text.FORM_ERROR_ID + "\n\n"; //add error
 				valid = false; //indicate we can't proceed				
 			}	
-			
+						
 			int age = -1;
 			try {
 				age = Integer.parseInt(ageTextField.getText()); //read age from its text field, check if it is a valid number
 			} catch(NumberFormatException error) {  //wasn't a valid number: age remains at -1
-				errorString += "Gelieve je leeftijd correct in te geven! (Enkel cijfers.)\n\n"; //add error
+				errorString += Text.FORM_ERROR_AGE + "\n\n"; //add error
 				valid = false; //indicate we can't proceed				
 			}		
 								
 			if (gender == 'x') { //gender hasn't been set yet (or this would be 'm' or 'f')
-				errorString += "Je hebt je geslacht nog niet aangeduid!\n\n"; //add error
+				errorString += Text.FORM_ERROR_GENDER + "\n\n"; //add error
 				valid = false; //indicate we can't proceed
 			}
 								

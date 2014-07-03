@@ -309,7 +309,7 @@ public class Experiment {
 		responseTimer = new TimerTask() {
 			 @Override
 			    public void run() {
-				 gui.xpPane.showTooLateError();
+				 gui.xpPane.showTooSlowError();
 				 
 				 timer.schedule(new TimerTask() {          
 					    @Override
