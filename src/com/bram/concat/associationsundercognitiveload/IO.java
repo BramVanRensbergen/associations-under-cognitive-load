@@ -89,7 +89,7 @@ public abstract class IO {
 			e.printStackTrace();   
 		}	
 		
-		writeData(Text.HEADERS); //write the headers as the first line
+		writeData(Text.HEADER); //write the headers as the first line
 	}
 
 	/**

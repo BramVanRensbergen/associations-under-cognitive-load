@@ -27,7 +27,6 @@ import java.util.TimerTask;
 import com.bram.concat.associationsundercognitiveload.IO;
 import com.bram.concat.associationsundercognitiveload.Options;
 import com.bram.concat.associationsundercognitiveload.Text;
-import com.bram.concat.associationsundercognitiveload.experiment.TrialGroup.IncorrectNumberOfTrialsException;
 import com.bram.concat.associationsundercognitiveload.gui.Gui;
 import com.bram.concat.associationsundercognitiveload.pattern.NoloadPattern;
 import com.bram.concat.associationsundercognitiveload.pattern.Pattern;

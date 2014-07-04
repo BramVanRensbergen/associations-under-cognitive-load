@@ -179,7 +179,7 @@ public abstract class Text {
 	/**
 	 * Output headers i.e. first line of every datafile.
 	 */
-	public static final String HEADERS = "trialNb\tgroupNb\tindexInGroup\tcue\tassociation\tassoNb\ttimeToFirstKeypress\ttimeToSubmission\tlist\t"
+	public static final String HEADER = "trialNb\tgroupNb\tindexInGroup\tcue\tassociation\tassoNb\ttimeToFirstKeypress\ttimeToSubmission\tlist\t"
 			+ "load\toriginal_pattern\treproduced_pattern\tcorrect\thits\tmisses\tfalseAlarms";
 	
 	
@@ -207,9 +207,7 @@ public abstract class Text {
 	 * The errormessage when participant is too slow is displayed in this font.
 	 */
 	public static final Font FONT_TOO_SLOW_MESSAGE = new Font("Serif", Font.PLAIN, 60);
-
-	
-	
+		
 	/**
 	 * @return The current month and day, formatted as a string, seperated by an underscore.
 	 */
