@@ -146,7 +146,7 @@ public abstract class Text {
 		+ "Klik op de Onbekend Woord knop rechtsonder als je het woord niet kent en op de Geen associatie knop als je geen andere associaties vlot kan bedenken.",
 
 		"Voor de geheugentaak is het de bedoeling dat je zo <b>accuraat</b> mogelijk bent. Voor de associatietaak is het daarnaast ook de bedoeling dat je zo <b>snel</b> mogelijk antwoordt, "
-		+ "als je te lang wacht verschijnt de boodschap “Te traag!”. Snelheid is niet belangrijk in de geheugentaak. Beide taken zijn even belangrijk. Eerst zal je de procedure "
+		+ "als je te lang wacht verschijnt de boodschap 'Te traag!'. Snelheid is niet belangrijk in de geheugentaak. Beide taken zijn even belangrijk. Eerst zal je de procedure "
 		+ "kunnen oefenen in een oefenfase." 	
 		}; 
 
