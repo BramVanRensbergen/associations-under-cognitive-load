@@ -9,10 +9,10 @@ This is the code to an experiment in which participants give up to three word as
 The experiment was created for personal use (ongoing research), but anyone may use it if they like.
 
 To use:
-* Download the project, compile it using Java Development Kit, have the participant run it on a computer with Java Runtime Environment installed.
+* Download the project, compile it using the Java Development Kit, and have the participant run it on a computer with Java Runtime Environment installed.
 * Currently supports Java 7 and 8. Older versions might work, but have not been tested.
-* You can just change the items in stimuli.txt if you wish to run the experiment with default settings.
-* Make sure the 'data' folder exists, and the program has write access to it.
+* You can just change the items in input/stimuli.txt if you wish to run the experiment with default settings.
+* Make sure the 'output' folder exists, and the program has write access to it.
 * Many program options can be tweaked in Options.java.
 * Instructions/buttons/etc during the experiment are in Dutch, but it is quite easy to translate them: all language displayed to the user is defined in Text.java. Comments, code, output headers, ... are all in English.
 * (After any changes to a .java file, you will have to recompile.)
