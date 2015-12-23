@@ -36,6 +36,7 @@ import com.bram.concat.associationsundercognitiveload.Text;
  */
 @SuppressWarnings("serial")
 public class Gui extends JFrame {
+	
 	/**
 	 * Contains whatever is currently showing, e.g. the introduction, the actual experiment, ...
 	 */

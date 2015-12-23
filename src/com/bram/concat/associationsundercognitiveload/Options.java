@@ -36,18 +36,18 @@ public abstract class Options {
 	 * Used only during development; should ALWAYS be set to {@code TRUE} when an actual participant is using the experiment.
 	 * When {@code TRUE}, the experiment is considerably faster, and does not ask for participant info (uses some default values).
 	 */
-	public static final boolean DEBUG = true;
+	public static final boolean DEBUG = false;
 	
 	/**
 	 * Data files are written out to this directory.
 	 * Make sure this directory exists, and the program has write access to it.
 	 */
-	public static final String DATA_FOLDER    = "data/";
+	public static final String DATA_FOLDER    = "output/";
 	
 	/**
 	 * File containing the stimuli that will be used in the experiment.
 	 */
-	public static final String STIM_FILE = "stimuli.txt";
+	public static final String STIM_FILE = "input/stimuli.txt";
 	
 	/**
 	 * True: GUI has no titlebar, close-buttons, etc.
@@ -98,8 +98,10 @@ public abstract class Options {
 	 */
 	public static final int N_BLOCKS = 3;
 	
+	
+	
 	/*
-	 * ONLY CHANGE THESE OPTIONS IF YOU KNOW WHAT YOU ARE DOING
+	 * ONLY CHANGE THE FOLLOWING OPTIONS IF YOU KNOW WHAT YOU ARE DOING
 	 */
 	
 	/**

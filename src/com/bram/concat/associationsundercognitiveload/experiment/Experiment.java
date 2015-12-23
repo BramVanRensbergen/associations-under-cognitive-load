@@ -35,6 +35,7 @@ import com.bram.concat.associationsundercognitiveload.pattern.Pattern;
  * Handles the flow of the experiment.
  */
 public class Experiment {
+	
 	/**
 	 * Handles the experiment's layout.
 	 */
@@ -56,7 +57,7 @@ public class Experiment {
 	public long RT_start;
 	
 	/**
-	 * Used internally to track the progress of the experiment. Values can be TRAINING, XP.
+	 * Used internally to track the progress of the experiment. Values can be TRAINING, XP, INTERBLOCK_INSTRUCTIONS.
 	 */
 	private int experimentPhase;	
 	
@@ -127,7 +128,7 @@ public class Experiment {
 		experimentPhase = PHASE_TRAINING;			//indicate current phase
 		timer = new Timer();						//initialize timer
 		gui = new Gui();							//create GUI
-		start();									//Ask for participant's information
+		start();									//ask for participant's information
 	}
 	
 	/**
@@ -222,7 +223,7 @@ public class Experiment {
 	}
 	
 	/**
-	 * Start the indicated TrialGroup, beginning by showing it's pre-pattern fixation cross.
+	 * Start the indicated TrialGroup, beginning by showing its pre-pattern fixation cross.
 	 */
 	private void startTrialGroup(TrialGroup trialGroup) {
 		currentTrialGroup = trialGroup;

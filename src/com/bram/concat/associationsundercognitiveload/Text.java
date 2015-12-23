@@ -25,14 +25,13 @@ import java.util.Calendar;
 /**
  * Helper class that contains text displayed in the instructions and in the goodbye message, font settings, datafile headers, ...
  * All text that is displayed to the participant is written here, so if you wish to translate the experiment, you should only need this file.
- * Some
  */
 public abstract class Text {
 	
 	/**
 	 * Label for the ID form entry.
 	 */
-	public static final String FORM_ID = "Proefpersoon-nr (vraag aan proefleider): ";
+	public static final String FORM_ID = "Proefpersoon-nr: ";
 	
 	/**
 	 * Label for the age form entry.
@@ -209,7 +208,7 @@ public abstract class Text {
 	public static final Font FONT_TOO_SLOW_MESSAGE = new Font("Serif", Font.PLAIN, 60);
 		
 	/**
-	 * @return The current month and day, formatted as a string, seperated by an underscore.
+	 * @return The current month and day, formatted as a string, separated by an underscore.
 	 */
 	public static String getDate() {
 		Calendar cal = Calendar.getInstance();

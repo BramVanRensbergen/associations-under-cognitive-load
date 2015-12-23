@@ -28,13 +28,13 @@ import com.bram.concat.associationsundercognitiveload.pattern.LowloadPattern;
 import com.bram.concat.associationsundercognitiveload.pattern.Pattern;
 
 @SuppressWarnings("serial")
-public class TrialGroup extends ArrayList<Trial>{
+public class TrialGroup extends ArrayList<Trial> {
 		
 	 /**
      * @return All trials divided in {@code TrialGroups}, each containing {@code Options.TRIALS_PER_GROUP} trials (defaults to 5).
 	 * @throws IncorrectNumberOfTrialsException Total number of trials should a multiple of {@code Options.TRIALS_PER_GROUP}
      */
-    public static List<TrialGroup> createTrialGroups(List<Trial> trials) throws IncorrectNumberOfTrialsException{
+    public static List<TrialGroup> createTrialGroups(List<Trial> trials) throws IncorrectNumberOfTrialsException {
     	List<TrialGroup> trialGroups = new ArrayList<TrialGroup>();
     	
     	while (!trials.isEmpty()) {

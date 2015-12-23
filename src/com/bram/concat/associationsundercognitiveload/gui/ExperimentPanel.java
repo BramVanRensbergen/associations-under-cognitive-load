@@ -239,8 +239,10 @@ public class ExperimentPanel extends JPanel {
 		repaint();	
 	}
 	
+	/** 
+	 * Ss can click this to move to the next cue, because they don't know the word, or because they don't have any more associations.
+	 */
 	private class SkipButton extends JButton {
-
 		public String text;
 		
 		private SkipButton() {
@@ -265,6 +267,9 @@ public class ExperimentPanel extends JPanel {
 		}
 	}
 	
+	/**
+	 * Listen to keypresses: submit an association on 'enter', and record the first keypress to keep track of response time
+	 */
 	private class ReponseDispatcher implements KeyEventDispatcher {
         @Override
         public boolean dispatchKeyEvent(KeyEvent e) {
